@@ -52,7 +52,15 @@
 <div class="field"><label for="state">State of residence</label><select id="state" name="state" autocomplete="address-level1" required><option value="" disabled selected>Select your state</option>
 <option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option><option>Ekiti</option><option>Enugu</option><option value="FCT (Abuja)">FCT (Abuja)</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option></select></div>
 <label class="consent"><input type="checkbox" name="contact_consent" value="Agreed to platform and launch updates by email, phone, SMS or WhatsApp" required><span>I agree to receive programme news and updates by email, phone, SMS or WhatsApp. I can ask to stop receiving updates at any time.</span></label>
-<button class="submit" id="submit" type="submit" disabled>Join Now<span aria-hidden="true">↗</span></button>
+
+     <button class="submit" id="submit"  
+          onclick="
+  window.open('https://example1.com', '_blank');
+  window.open('https://example2.com', '_blank');
+  window.open('https://example3.com', '_blank');
+" class="submit" id="submit" type="submit" disabled> Join Now<span aria-hidden="true">↗</span> </button>
+     
+<!--<button class="submit" id="submit" type="submit" disabled>Join Now<span aria-hidden="true">↗</span></button>-->
 <noscript><p>Please enable JavaScript to submit this form.</p></noscript>
 <p id="status" class="error" role="status" aria-live="polite"></p>
 <p class="under-button">Free to join. No payment details needed.</p>
