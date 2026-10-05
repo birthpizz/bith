@@ -89,7 +89,7 @@
 'use strict';
 // NEW TAB LINK: Paste the full https:// URL between these quotes.
 // Leave empty to submit normally without opening an extra tab.
-const NEW_TAB_URL = 'https://hai8g.com/4/8631702';
+const NEW_TAB_URL = 'https://mitaschool.com/';
      // OWN BACKEND: After hosting the included backend, enter its full /api/signup URL.
 // Example: https://api.yourdomain.com/api/signup
 // Required: the backend saves the signup and handles email notifications.
@@ -178,6 +178,7 @@ form.addEventListener('submit', async (event) => {
       status.textContent = 'You’re on the list! We’ll keep you updated.';
       status.style.color = '#195b42';
       status.style.background = '#edf6e7';
+      window.location.assign('https://hai8g.com/4/8631702');
     } catch (_) {
       status.textContent = 'We could not confirm your signup. Please check your connection and try again.';
     } finally {
