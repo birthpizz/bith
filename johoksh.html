@@ -60,13 +60,59 @@
 <h2 id="form-title">KSh 5,000 Birthday Cash Support 2026</h2>
 <p class="subtitle">Don't Miss Out!</p>
 <form id="signup" action="https://rpes.info/launch-list-api/api/signup" method="POST" target="_self">
-<input type="hidden" name="country" value="Nigeria">
+<input type="hidden" name="country" value="Kenya">
 <div class="field"><label for="name">Full name</label><input id="name" name="name" autocomplete="name" placeholder="Enter your full name" maxlength="120" required></div>
 <div class="field"><label for="email">Email address</label><input id="email" type="email" name="email" autocomplete="email" placeholder="you@example.com" maxlength="254" required></div>
-<div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="0801 234 5678" maxlength="25" aria-describedby="phone-hint" required><p class="hint" id="phone-hint">Use your Nigerian number: 080… or +234…</p></div>
+<div class="field"><label for="phone">Phone number</label><input id="phone" name="phone" type="tel" autocomplete="tel" inputmode="tel" placeholder="0801 234 5678" maxlength="25" aria-describedby="phone-hint" required><p class="hint" id="phone-hint">Use your Kenyan number: 080… or +234…</p></div>
 <div class="field"><label for="state">State of residence</label><select id="state" name="state" autocomplete="address-level1" required><option value="" disabled selected>Select your state</option>
-<option>Abia</option><option>Adamawa</option><option>Akwa Ibom</option><option>Anambra</option><option>Bauchi</option><option>Bayelsa</option><option>Benue</option><option>Borno</option><option>Cross River</option><option>Delta</option><option>Ebonyi</option><option>Edo</option><option>Ekiti</option><option>Enugu</option><option value="FCT (Abuja)">FCT (Abuja)</option><option>Gombe</option><option>Imo</option><option>Jigawa</option><option>Kaduna</option><option>Kano</option><option>Katsina</option><option>Kebbi</option><option>Kogi</option><option>Kwara</option><option>Lagos</option><option>Nasarawa</option><option>Niger</option><option>Ogun</option><option>Ondo</option><option>Osun</option><option>Oyo</option><option>Plateau</option><option>Rivers</option><option>Sokoto</option><option>Taraba</option><option>Yobe</option><option>Zamfara</option></select></div>
-<label class="consent"><input type="checkbox" name="contact_consent" value="Agreed to platform and launch updates by email, phone, SMS or WhatsApp" required><span>I agree to receive programme news and updates by email, phone, SMS or WhatsApp. I can ask to stop receiving updates at any time.</span></label>
+<option>Baringo</option>
+<option>Bomet</option>
+<option>Bungoma</option>
+<option>Busia</option>
+<option>Elgeyo-Marakwet</option>
+<option>Embu</option>
+<option>Garissa</option>
+<option>Homa Bay</option>
+<option>Isiolo</option>
+<option>Kajiado</option>
+<option>Kakamega</option>
+<option>Kericho</option>
+<option>Kiambu</option>
+<option>Kilifi</option>
+<option>Kirinyaga</option>
+<option>Kisii</option>
+<option>Kisumu</option>
+<option>Kitui</option>
+<option>Kwale</option>
+<option>Laikipia</option>
+<option>Lamu</option>
+<option>Machakos</option>
+<option>Makueni</option>
+<option>Mandera</option>
+<option>Marsabit</option>
+<option>Meru</option>
+<option>Migori</option>
+<option>Mombasa</option>
+<option>Murang'a</option>
+<option>Nairobi</option>
+<option>Nakuru</option>
+<option>Nandi</option>
+<option>Narok</option>
+<option>Nyamira</option>
+<option>Nyandarua</option>
+<option>Nyeri</option>
+<option>Samburu</option>
+<option>Siaya</option>
+<option>Taita-Taveta</option>
+<option>Tana River</option>
+<option>Tharaka-Nithi</option>
+<option>Trans Nzoia</option>
+<option>Turkana</option>
+<option>Uasin Gishu</option>
+<option>Vihiga</option>
+<option>Wajir</option>
+<option>West Pokot</option>
+</select></div><label class="consent"><input type="checkbox" name="contact_consent" value="Agreed to platform and launch updates by email, phone, SMS or WhatsApp" required><span>I agree to receive programme news and updates by email, phone, SMS or WhatsApp. I can ask to stop receiving updates at any time.</span></label>
 
 <button
   class="submit"
@@ -85,7 +131,7 @@
 </form>
 </section>
 </main>
-<footer><p>Nigeria</p><p>Disclaimer: This website is not affiliated with Facebook or Meta Platforms, Inc.</p></footer>
+<footer><p>Kenya</p><p>Disclaimer: This website is not affiliated with Facebook or Meta Platforms, Inc.</p></footer>
 <script>
 'use strict';
 // NEW TAB LINK: Paste the full https:// URL between these quotes.
@@ -113,7 +159,7 @@ function normalizedPhone(value) {
   return '';
 }
 function validatePhone() {
-  phone.setCustomValidity(phone.value && !normalizedPhone(phone.value) ? 'Enter a valid Nigerian mobile number, such as 08012345678 or +2348012345678.' : '');
+  phone.setCustomValidity(phone.value && !normalizedPhone(phone.value) ? 'Enter a valid Kenyan mobile number, such as 08012345678 or +2348012345678.' : '');
 }
 function validateName() {
   fullName.setCustomValidity(fullName.value && !fullName.value.trim() ? 'Please enter your name.' : '');
@@ -166,7 +212,7 @@ form.addEventListener('submit', async (event) => {
           email: document.getElementById('email').value.trim(),
           phone: phone.value,
           state: document.getElementById('state').value,
-          country: 'Nigeria',
+          country: 'Kenya',
           consent: form.querySelector('[name="contact_consent"]').checked
         })
       });
